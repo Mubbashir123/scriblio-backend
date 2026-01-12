@@ -5,12 +5,12 @@ exports.createBoard=async (req,res)=>
     try{
         const title=req.body.title;
         const owner=req.body.owner;
-
+        const elements=req.body.elements;
         const newBoard=new Board(
             {
                 title:title,
                 owner:owner,
-                elements:[]
+                elements:elements|| []
             }
         )
         const savedBoard=await newBoard.save();
