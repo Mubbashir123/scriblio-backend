@@ -30,9 +30,20 @@ app.get("/",(req,res)=>
 
 io.on("connection",(socket=>
 {
-    
-    console.log("User Connected",socket.id);
 
+    console.log("User Connected",socket.id);
+    socket.on('join',(roomId)=>
+    {
+        socket.join(roomId);
+        console.log(`User joined room: ${roomId}`);
+    })
+
+    socket.on('drawing', (data) => {
+        
+        console.log("Drawing received on server:", data.roomId); 
+        
+        socket.to(data.roomId).emit('drawing', data.element);
+    });
     socket.on("disconnect",()=>
     {
         console.log("User disconnect",socket.id);
