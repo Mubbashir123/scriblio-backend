@@ -42,3 +42,23 @@ exports.getBoard=async (req,res)=>
         res.status(500).json({message:"Server Error"});
     }
 }
+exports.saveBoard=async (req,res)=>
+{
+    const {id}=req.params;
+    const {elements}=req.body;
+
+    try{
+
+        const board=await Board.findByIdAndUpdate(
+            id,{elements},{new:true}
+
+
+        );
+        res.json(board);
+    }
+    catch(error)
+    {
+        console.log(error);
+        res.status(500).send("Servor Error");
+    }
+}

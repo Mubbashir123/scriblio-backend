@@ -5,6 +5,6 @@ const boardController=require("../controllers/BoardController");
 
 router.post("/",boardController.createBoard);
 router.get("/:id",boardController.getBoard);
-
+router.put("/:id",boardController.saveBoard);
 
 module.exports=router;
